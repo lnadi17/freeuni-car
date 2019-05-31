@@ -67,16 +67,14 @@ function signal(url, onStream, onError, onClose, onMessage) {
 
             pc.onremovestream = function (event) {
                 console.log("the stream has been removed: do your stuff now");
-		
-		datachannel = null;
+		        datachannel = null;
             };
 
             pc.ondatachannel = function (event) {
                 console.log("a data channel is available: do your stuff with it");
                 // For an example, see https://www.linux-projects.org/uv4l/tutorials/webrtc-data-channels/
-		
-		// Initialize datachannel variable
-		datachannel = event.channel;
+        		// Initialize datachannel variable
+        		datachannel = event.channel;
             };
 
             /* kindly signal the remote peer that we would like to initiate a call */
@@ -86,8 +84,8 @@ function signal(url, onStream, onError, onClose, onMessage) {
                     // If forced, the hardware codec depends on the arch.
                     // (e.g. it's H264 on the Raspberry Pi)
                     // Make sure the browser supports the codec too.
-                    force_hw_vcodec: true,
-                    vformat: 30, /* 30=640x480, 30 fps */
+                    force_hw_vcodec: false,
+                    vformat: 30, /* 30=640x480 5|10=320x240 40=960x720 105=1920x1080 */
                     trickle_ice: true
                 }
             };
@@ -173,9 +171,10 @@ function signal(url, onStream, onError, onClose, onMessage) {
                 pc = null;
                 ws = null;
 
-		// Deinitialize datachannel (Maybe here's a wrong place to do that)
-		datachannel = null;
+        		// Deinitialize datachannel
+        		datachannel = null;
             }
+
             if (onClose) {
                 onClose();
             }

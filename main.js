@@ -5,7 +5,6 @@
         var isStreaming = false;
         var start = document.getElementById('start');
         var stop = document.getElementById('stop');
-	var sendmsg = document.getElementById('sendmsg');
         var video = document.getElementById('v');
         var canvas = document.getElementById('c');
         var ctx = canvas.getContext('2d');
@@ -53,11 +52,6 @@
                 isStreaming = true;
             }
         }, false);
-
-	/* sendmsg.addEventListener('click', function (e) {
-	    var text = "hello from the other side";
-	    alert(text);
-	}, false); */
 
         // Wait for the video to start to play
         video.addEventListener('play', function () {
