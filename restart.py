@@ -11,6 +11,7 @@ wifi = Wireless(INTERFACE_NAME);
 
 while True:
     current = wifi.getEssid()
+    print(current)
     if (current != last and current == WIFI_NAME):
         os.system("sudo service uv4l_raspicam restart")
     last = current

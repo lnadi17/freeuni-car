@@ -85,7 +85,7 @@ function signal(url, onStream, onError, onClose, onMessage) {
                     // (e.g. it's H264 on the Raspberry Pi)
                     // Make sure the browser supports the codec too.
                     force_hw_vcodec: true,
-                    vformat: 10, /* 30=640x480 5|10=320x240 40=960x720 105=1920x1080 */
+                    vformat: 30, /* 30=640x480 5|10=320x240 40=960x720 105=1920x1080 */
                     trickle_ice: true
                 }
             };

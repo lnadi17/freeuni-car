@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 from time import sleep
 from threading import Thread, Event
 
-MAX_POWER = 50
+MAX_POWER = 100
 SLEEP_TIME = 0.02 # seconds (for MAX_POWER=50 and SLEEP_TIME=0.02 it lasts for 0.02*50=1 seconds)
 
 l1 = 23

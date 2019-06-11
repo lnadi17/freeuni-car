@@ -40,3 +40,4 @@ while True:
     finally:
         GPIO.cleanup()
         connection.close()
+
