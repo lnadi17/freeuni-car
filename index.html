@@ -9,7 +9,7 @@
                 margin-top:2%;
                 text-align:center;
                 color:#000;
-                background-color:#ff9d00;
+                background-color:#9813d6;
             }
             #server {
                 display:block;
@@ -41,6 +41,8 @@
         </style>
         <script src='signalling.js'></script>
         <script src='main.js'></script>
+        <script async src="cv.js"></script>
+        <script src='face-detection.js'></script>
     </head>
     <body>
         <h1>Freeuni Car</h1>
@@ -51,6 +53,7 @@
         </div>
         <video id='v'></video>
         <canvas id='c'></canvas>
+        <button id='faceEffect'>Toggle Face Detection</button>
         <script>
             // Let's get a default address for the signalling server
             var address = document.getElementById('address').value;
@@ -87,14 +90,16 @@
 			  65: false,
 			  87: false,
 			  83: false,
-			  68: false
+			  68: false,
+              16: false,
 			};
 
 			var keyMap = {
 			  65: "a",
 			  87: "w",
 			  83: "s",
-			  68: "d"
+			  68: "d",
+              16: "^",
 			};
 
 			document.body.addEventListener('keydown', function(e) {
@@ -103,7 +108,7 @@
 					var key = keyMap[e.keyCode];
 					datachannel.send(key + "+");
 				  already[e.keyCode] = true;
-				} 
+				}
 			  }
 			});
 

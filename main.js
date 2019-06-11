@@ -9,6 +9,10 @@
         var canvas = document.getElementById('c');
         var ctx = canvas.getContext('2d');
 
+        // Effects
+        var faceEffect = document.getElementById('faceEffect');
+        var isfaceEffectActive = false;
+
         start.addEventListener('click', function (e) {
             var address = document.getElementById('address').value;
             var protocol = location.protocol === "https:" ? "wss:" : "ws:";
@@ -64,7 +68,17 @@
                 var h = canvas.getAttribute('height');
                 ctx.fillRect(0, 0, w, h);
                 ctx.drawImage(video, 0, 0, w, h);
+
+                if (isFaceEffectActive) {
+                    detectFace(canvas);
+                }
+                
             }, 33);
+        }, false);
+
+        faceEffect.addEventListener('click', function () {
+            Console.log("Toggled face detection");
+            isFaceEffectActive = !isFaceEffectActive;
         }, false);
     });
 })();

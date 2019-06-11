@@ -3,7 +3,10 @@ from time import sleep
 from threading import Thread, Event
 
 MAX_POWER = 100
-SLEEP_TIME = 0.02 # seconds (for MAX_POWER=50 and SLEEP_TIME=0.02 it lasts for 0.02*50=1 seconds)
+NORMAL_POWER = 50
+power = NORMAL_POWER
+
+SLEEP_TIME = 0.02 # seconds (for power=50 and SLEEP_TIME=0.02 it lasts for 0.02*50=1 seconds)
 
 l1 = 23
 l2 = 24
@@ -17,11 +20,13 @@ rf = 1
 
 print("\n")
 print("The default speed & direction of motor is 0 & Forward.")
-print("'w/s/a/d' = up/down/left/right '+/-' = down/up")
+print("'w/s/a/d' = up/down/left/right; '+/-' = keydown/keyup; ^ = increase max speed")
 print("\n")
 
 last_l = 0
 last_r = 0
+
+last_direction = ""
 
 # They're needed when user first presses 'a' and then 'w'
 l_swerving = False;
@@ -95,20 +100,35 @@ def run_engine_with_keyboard_input(input):
 
     global l_is_running
     global r_is_running
+
+    global last_direction
+
+    global power
     
     # Direction is a string, key_pressed is a boolean
     direction, key_pressed = parse_keyboard_input(input)
+
+    if (direction == '^'):
+        if (key_pressed):
+            power = MAX_POWER
+        else:
+            power = NORMAL_POWER
+            key_pressed = True
+        direction = last_direction
+    else:
+        last_direction = direction
+
 
     if (direction == 'w'):
         if (key_pressed):
             # Start moving
             if not l_swerving:
-                change_left(MAX_POWER)
+                change_left(power)
             else:
                 change_left(0)
 
             if not r_swerving:
-                change_right(MAX_POWER)
+                change_right(power)
             else:
                 change_right(0)
             # Forwards
@@ -136,12 +156,12 @@ def run_engine_with_keyboard_input(input):
         if (key_pressed):
             # Start moving
             if not l_swerving:
-                change_left(MAX_POWER)
+                change_left(power)
             else:
                 change_left(0)
 
             if not r_swerving:
-                change_right(MAX_POWER)
+                change_right(power)
             else:
                 change_right(0)
             # Backwards
