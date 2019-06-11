@@ -33,32 +33,32 @@ function detectFace(canvas) {
     var imgGray = new cv.Mat();
     var imgColor = new cv.Mat(); // Opencv likes RGB
 
-    cv.cvtColor(img, imgGray, cv.ColorConversionCodes.COLOR_RGBA2GRAY.value, 0);
-    cv.cvtColor(img, imgColor, cv.ColorConversionCodes.COLOR_RGBA2RGB.value, 0);
+    // cv.cvtColor(img, imgGray, cv.ColorConversionCodes.COLOR_RGBA2GRAY.value, 0);
+    // cv.cvtColor(img, imgColor, cv.ColorConversionCodes.COLOR_RGBA2RGB.value, 0);
 
-    var faces = new cv.RectVector();
-    var s1 = [50, 50];
-    var s2 = [0, 0];
-    faceCascade.detectMultiScale(imgGray, faces, 1.3, 4, 0, s1, s2);
+    // var faces = new cv.RectVector();
+    // var s1 = [50, 50];
+    // var s2 = [0, 0];
+    // faceCascade.detectMultiScale(imgGray, faces, 1.3, 4, 0, s1, s2);
 
-    for (var i = 0; i < faces.size(); i += 1) {
-        var faceRect = faces.get(i);
-        fx = faceRect.x;
-        fy = faceRect.y;
-        fw = faceRect.width;
-        fh = faceRect.height;
-        var p1 = [fx, fy];
-        var p2 = [fx + fw, fy + fh];
-        var color = new cv.Scalar(255, 0, 0);
-        cv.rectangle(imgColor, p1, p2, color, 2, 8, 0);
-        faceRect.delete();
-        color.delete();
-    }
+    // for (var i = 0; i < faces.size(); i += 1) {
+    //     var faceRect = faces.get(i);
+    //     fx = faceRect.x;
+    //     fy = faceRect.y;
+    //     fw = faceRect.width;
+    //     fh = faceRect.height;
+    //     var p1 = [fx, fy];
+    //     var p2 = [fx + fw, fy + fh];
+    //     var color = new cv.Scalar(255, 0, 0);
+    //     cv.rectangle(imgColor, p1, p2, color, 2, 8, 0);
+    //     faceRect.delete();
+    //     color.delete();
+    // }
 
-    showImage(imgColor, canvas);
+    showImage(imgGray, canvas);
 
     img.delete();
     imgColor.delete();
-    faces.delete();
+    //faces.delete();
     imgGray.delete();
 }
