@@ -115,8 +115,11 @@ def run_engine_with_keyboard_input(input):
             power = MAX_POWER
         else:
             power = NORMAL_POWER
-        direction = last_direction
-        key_pressed = last_key_pressed
+        if(last_direction != 'a' || last_direction != 'd'):
+            direction = last_direction
+            key_pressed = last_key_pressed
+        else:
+            direction = ""
     else:
         last_direction = direction
         last_key_pressed = key_pressed
