@@ -24,7 +24,7 @@ function detectFace(canvas) {
         console.log("Creating the Face cascade classifier");
         faceCascade = new cv.CascadeClassifier();
         console.log("Created the face cascade classifier");
-        //faceCascade.load('haarcascade_frontalface_default.xml');
+        faceCascade.load('haarcascade_frontalface_default.xml');
     }
 
     // var ctx = canvas.getContext('2d');
