@@ -11,7 +11,7 @@
 
         // Effects
         var faceEffect = document.getElementById('faceEffect');
-        var isfaceEffectActive = false;
+        var isFaceEffectActive = false;
 
         start.addEventListener('click', function (e) {
             var address = document.getElementById('address').value;
@@ -72,7 +72,7 @@
                 if (isFaceEffectActive) {
                     detectFace(canvas);
                 }
-                
+
             }, 33);
         }, false);
 
