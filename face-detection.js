@@ -7,16 +7,17 @@ showImage = function (mat, canvas) {
     var ctx = canvas.getContext('2d');
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    var imdata = ctx.createImageData(mat.cols, mat.rows);
+    ctx.drawImage(mat, 0, 0, canvas.width, canvas.height)
+    //var imdata = ctx.createImageData(mat.cols, mat.rows);
 
-    for (var i = 0, j = 0; i < data.length; i += channels, j += 4) {
-        imdata.data[j] = data[i];
-        imdata.data[j + 1] = data[i + 1 % channels];
-        imdata.data[j + 2] = data[i + 2 % channels];
-        imdata.data[j + 3] = 255;
-    }
+    // for (var i = 0, j = 0; i < data.length; i += channels, j += 4) {
+    //     imdata.data[j] = data[i];
+    //     imdata.data[j + 1] = data[i + 1 % channels];
+    //     imdata.data[j + 2] = data[i + 2 % channels];
+    //     imdata.data[j + 3] = 255;
+    // }
 
-    ctx.putImageData(imdata, 0, 0);
+    // ctx.putImageData(imdata, 0, 0);
 };
 
 function detectFace(canvas) {
