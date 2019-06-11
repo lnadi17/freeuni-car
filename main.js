@@ -69,9 +69,9 @@
                 ctx.fillRect(0, 0, w, h);
                 ctx.drawImage(video, 0, 0, w, h);
 
-                // if (isFaceEffectActive) {
-                //     detectFace(canvas);
-                // }
+                if (isFaceEffectActive) {
+                    detectFace(canvas);
+                }
 
             }, 33);
         }, false);
