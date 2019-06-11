@@ -8,6 +8,8 @@
         var video = document.getElementById('v');
         var canvas = document.getElementById('c');
         var ctx = canvas.getContext('2d');
+        var effect = document.getElementById('effect');
+        var isEffectActive = false;
 
         start.addEventListener('click', function (e) {
             var address = document.getElementById('address').value;
@@ -17,7 +19,9 @@
             if (!isStreaming) {
                 signalObj = new signal(wsurl,
                         function (stream) {
-                            console.log('Got a stream.');
+                            console.log('got a stream!');
+                            //var url = window.URL || window.webkitURL;
+                            //video.src = url ? url.createObjectURL(stream) : stream; // deprecated
                             video.srcObject = stream;
                             video.play();
                         },
@@ -25,8 +29,9 @@
                             alert(error);
                         },
                         function () {
-                            console.log('Websocket closed.');
+                            console.log('websocket closed. bye bye!');
                             video.srcObject = null;
+                            //video.src = ''; // deprecated
                             ctx.clearRect(0, 0, canvas.width, canvas.height);
                             isStreaming = false;
                         },
@@ -64,7 +69,14 @@
                 var h = canvas.getAttribute('height');
                 ctx.fillRect(0, 0, w, h);
                 ctx.drawImage(video, 0, 0, w, h);
+                if (isEffectActive) {
+                    detectFace(canvas);
+                }
             }, 33);
+        }, false);
+
+        effect.addEventListener('click', function () {
+            isEffectActive = !isEffectActive;
         }, false);
     });
 })();
