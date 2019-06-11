@@ -6,7 +6,7 @@ MAX_POWER = 100
 NORMAL_POWER = 50
 power = NORMAL_POWER
 
-SLEEP_TIME = 0.02 # seconds (for power=50 and SLEEP_TIME=0.02 it lasts for 0.02*50=1 seconds)
+SLEEP_TIME = 0.01 # seconds (for power=50 and SLEEP_TIME=0.02 it lasts for 0.02*50=1 seconds)
 
 l1 = 23
 l2 = 24
