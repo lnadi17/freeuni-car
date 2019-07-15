@@ -75,3 +75,19 @@ function decolorize(canvas) {
     img.delete();
     imgGray.delete();
 }
+
+function drawLocation(canvas, locationString) {
+    // var p = document.createElement("P");
+    // var node = document.createTextNode("Location: " + locationString);
+    // p.appendChild(node);
+    // p.styleLeft = "50vw";
+    // canvas.
+    var ctx = canvas.getContext('2d');
+    ctx.font = '23px Times New Roman';
+    ctx.textAlign ='center';
+    ctx.textBaseline = 'top';
+    ctx.strokeStyle = 'black';  // a color name or by using rgb/rgba/hex values
+    ctx.fillStyle = 'white';  // a color name or by using rgb/rgba/hex values
+    ctx.fillText('Location: ' + locationString, canvas.width / 2, 10); // text and position
+    ctx.strokeText('Location: ' + locationString, canvas.width / 2, 10); // text and position
+}

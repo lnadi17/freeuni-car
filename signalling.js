@@ -75,6 +75,17 @@ function signal(url, onStream, onError, onClose, onMessage) {
                 // For an example, see https://www.linux-projects.org/uv4l/tutorials/webrtc-data-channels/
         		// Initialize datachannel variable
         		datachannel = event.channel;
+
+
+                datachannel.onmessage = function (event) {
+                    console.log("got message:", event.data);
+                    var msg = event.data.split(" ");
+                    // Change location string
+                    if (msg[0] == 'location') {
+                        locationString = msg[2];
+                        console.log("new message:", locationString);
+                    }
+                }
             };
 
             /* kindly signal the remote peer that we would like to initiate a call */

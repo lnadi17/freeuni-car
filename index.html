@@ -1,6 +1,8 @@
 <!DOCTYPE html>
+
 <html lang='en'>
     <head>
+        <link href="hover.css" rel="stylesheet" media="all">
         <meta charset='utf-8' />
         <title>Freeuni Car</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,7 +11,34 @@
                 margin-top:2%;
                 text-align:center;
                 color:#000;
-                background-color:#9813d6;
+                background: linear-gradient(232deg, #e1dc18, #08ee62, #ee9808, #ee6508, #0aee08);
+                background-size: 1000% 1000%;
+
+                -webkit-animation: ity 59s ease infinite;
+                -moz-animation: ity 59s ease infinite;
+                -o-animation: ity 59s ease infinite;
+                animation: ity 59s ease infinite;
+            }
+
+            @-webkit-keyframes ity {
+                0%{background-position:0% 29%}
+                50%{background-position:100% 72%}
+                100%{background-position:0% 29%}
+            }
+            @-moz-keyframes ity {
+                0%{background-position:0% 29%}
+                50%{background-position:100% 72%}
+                100%{background-position:0% 29%}
+            }
+            @-o-keyframes ity {
+                0%{background-position:0% 29%}
+                50%{background-position:100% 72%}
+                100%{background-position:0% 29%}
+            }
+            @keyframes ity { 
+                0%{background-position:0% 29%}
+                50%{background-position:100% 72%}
+                100%{background-position:0% 29%}
             }
             #server {
                 display:block;
@@ -28,7 +57,7 @@
                 visibility:hidden;
             }
             canvas { border:2px solid #000;}
-            button {
+            .button {
                 border:none;
                 display:block;
                 padding:0.5em 1em;
@@ -37,25 +66,28 @@
                 color:#000;
                 background-color:#ff4c00;
             }
-            button:active { background-color:#e44d26; }
+            .button:active { background-color:#e44d26; }*/
         </style>
         <script async src="cv.js"></script>
-		<script src='face-detection.js'></script>
+		<script src='image-transformation.js'></script>
         <script src='signalling.js'></script>
         <script src='main.js'></script>
     </head>
     <body>
         <h1>Freeuni Car</h1>
-        <label id='server'>Web Service URL <input required type="text" id="address" value="" title="hostname (or IP address) and port of the UV4L WebRTC Web Service"/></label>
+        <label id='server'><input required type="hidden" id="address" value=""></label>
         <div>
-            <button id='start'>Start Streaming</button>
-            <button id='stop'>Stop Streaming</button>
+            <button id='start' class="button hvr-shutter-out-vertical">Start Streaming</button>
+            <button id='stop' class="button hvr-shutter-out-vertical">Stop Streaming</button>
         </div>
         <video id='v'></video>
         <canvas id='c'></canvas>
-        <button id='faceEffect'>Toggle Face Detection</button>
-        <button id='bwEffect'>Toggle Black and White</button>
-        <button id='capture'>Capture Image</button>
+        <div>              
+            <!-- <button style="display:inline-block;" id='faceEffect' class="button hvr-bounce-to-bottom">Toggle Face Detection</button> -->
+            <button style="display:inline-block;" id="bwEffect" class="button hvr-bounce-to-bottom">Toggle Black and White</button>
+            <button style="display:inline-block;" id='capture' class="button hvr-bounce-to-bottom">Capture Image</button>
+            <button style="display:inline-block;" id='locationEffect' class="button hvr-bounce-to-bottom">Toggle Location</button>
+        </div>
         <a id="link"></a>
         <script>
             // Let's get a default address for the signalling server

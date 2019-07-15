@@ -1,5 +1,7 @@
+var locationString = "oe";
 (function () {
     var signalObj = null;
+    
 
     window.addEventListener('DOMContentLoaded', function () {
         var isStreaming = false;
@@ -10,12 +12,16 @@
         var ctx = canvas.getContext('2d');
         var capture = document.getElementById('capture');
 
+
         // Effects
         var faceEffect = document.getElementById('faceEffect');
         var isFaceEffectActive = false;
 
         var bwEffect = document.getElementById('bwEffect');
         var isBwEffectActive = false;
+
+        var locationEffect = document.getElementById('locationEffect');
+        var isLocEffectActive = false;
 
         start.addEventListener('click', function (e) {
             var address = document.getElementById('address').value;
@@ -81,14 +87,18 @@
                     decolorize(canvas);
                 }
 
+                if (isLocEffectActive) {
+                    drawLocation(canvas, locationString);
+                }
+
             }, 33);
         }, false);
 
-        faceEffect.addEventListener('click', function () {
-            console.log("Toggled face detection.");
-            isFaceEffectActive = !isFaceEffectActive;
-            console.log(isFaceEffectActive);
-        }, false);
+        // faceEffect.addEventListener('click', function () {
+        //     console.log("Toggled face detection.");
+        //     isFaceEffectActive = !isFaceEffectActive;
+        //     console.log(isFaceEffectActive);
+        // }, false);
 
         bwEffect.addEventListener('click', function () {
             console.log("Toggled black and white.");
@@ -102,6 +112,11 @@
             link.setAttribute('download', 'freeuni-car-capture.png');
             link.setAttribute('href', canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"));
             link.click();
+        }, false);
+
+        locationEffect.addEventListener('click', function () {
+            isLocEffectActive = !isLocEffectActive;
+            console.log("Toggled location");
         }, false);
     });
 })();

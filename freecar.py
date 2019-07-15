@@ -2,8 +2,12 @@ import socket
 import time
 import os
 from engine import *
+from find import *
+from threading import Thread, Event
 
 SOCKET_PATH='/tmp/uv4l.socket'
+
+find_event = Event()
 
 try:
     os.unlink(SOCKET_PATH)
@@ -24,6 +28,11 @@ while True:
     try:
         print("Established connection.")
         gpio_setup()
+
+        find_event.set()
+        l_decrease_thread = Thread(target=update_location, args=(find_event, connection,))
+        l_decrease_thread.start()
+
         while True:
             data = connection.recv(16)
 
@@ -36,8 +45,8 @@ while True:
             run_engine_with_keyboard_input(data)
 
             time.sleep(0.01)
-
     finally:
+        find_event.clear()
         GPIO.cleanup()
         connection.close()
 
