@@ -74,14 +74,12 @@ def change_right(power):
     r.ChangeDutyCycle(power)
 
 def l_decrease(run_event):
-    print("start left decrease")
     current_power = last_l
     while(run_event.is_set()):
         current_power -= 1
         if not current_power < 0:
             l.ChangeDutyCycle(current_power)
         sleep(SLEEP_TIME)
-    print("stop left decrease");
         
 def r_decrease(run_event):
     current_power = last_r
@@ -102,8 +100,8 @@ def run_engine_with_keyboard_input(input):
     global l_is_running
     global r_is_running
 
-    global last_direction
-    global last_key_pressed
+    #global last_direction
+    #global last_key_pressed
 
     global power
     
@@ -115,14 +113,14 @@ def run_engine_with_keyboard_input(input):
             power = MAX_POWER
         else:
             power = NORMAL_POWER
-        if(last_direction == 'w' or last_direction == 's'):
-            direction = last_direction
-            key_pressed = last_key_pressed
-        else:
-            direction = ""
-    else:
-        last_direction = direction
-        last_key_pressed = key_pressed
+        #if (last_direction == 'w' or last_direction == 's'):
+        #    direction = last_direction
+        #    key_pressed = last_key_pressed
+        #else:
+        #    direction = ""
+    #else:
+    #    last_direction = direction
+    #    last_key_pressed = key_pressed
 
 
     if (direction == 'w'):

@@ -40,9 +40,9 @@
             button:active { background-color:#e44d26; }
         </style>
         <script async src="cv.js"></script>
+		<script src='face-detection.js'></script>
         <script src='signalling.js'></script>
         <script src='main.js'></script>
-        <script src='face-detection.js'></script>
     </head>
     <body>
         <h1>Freeuni Car</h1>
@@ -107,17 +107,17 @@
 				if (!already[e.keyCode]) {
 					var key = keyMap[e.keyCode];
 					datachannel.send(key + "+");
-				  already[e.keyCode] = true;
+					already[e.keyCode] = true;
 				}
 			  }
 			});
 
 			document.body.addEventListener('keyup', function(e) {
-			  if (e.keyCode in keyMap && datachannel) {
-				var key = keyMap[e.keyCode];
-				datachannel.send(key + "-");
-				already[e.keyCode] = false;
-			  }
+				if (e.keyCode in keyMap && datachannel) {
+					var key = keyMap[e.keyCode];
+					datachannel.send(key + "-");
+					already[e.keyCode] = false;
+				}
 			});	
 		</script>
     </body>

@@ -77,7 +77,7 @@
         }, false);
 
         faceEffect.addEventListener('click', function () {
-            console.log("Toggled face detection");
+            console.log("Toggled face detection.");
             isFaceEffectActive = !isFaceEffectActive;
         }, false);
     });
