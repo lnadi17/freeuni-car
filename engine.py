@@ -26,9 +26,6 @@ print("\n")
 last_l = 0
 last_r = 0
 
-last_direction = ""
-last_key_pressed = False
-
 # They're needed when user first presses 'a' and then 'w'
 l_swerving = False;
 r_swerving = False;
@@ -100,28 +97,16 @@ def run_engine_with_keyboard_input(input):
     global l_is_running
     global r_is_running
 
-    #global last_direction
-    #global last_key_pressed
-
     global power
     
     # Direction is a string, key_pressed is a boolean
     direction, key_pressed = parse_keyboard_input(input)
 
     if (direction == '^'):
-        if (key_pressed):
-            power = MAX_POWER
-        else:
+        if (power == MAX_POWER):
             power = NORMAL_POWER
-        #if (last_direction == 'w' or last_direction == 's'):
-        #    direction = last_direction
-        #    key_pressed = last_key_pressed
-        #else:
-        #    direction = ""
-    #else:
-    #    last_direction = direction
-    #    last_key_pressed = key_pressed
-
+        else:
+            power = MAX_POWER
 
     if (direction == 'w'):
         if (key_pressed):
