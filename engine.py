@@ -102,7 +102,7 @@ def run_engine_with_keyboard_input(input):
     # Direction is a string, key_pressed is a boolean
     direction, key_pressed = parse_keyboard_input(input)
 
-    if (direction == '^'):
+    if (direction == '^' and key_pressed):
         if (power == MAX_POWER):
             power = NORMAL_POWER
         else:

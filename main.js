@@ -8,10 +8,14 @@
         var video = document.getElementById('v');
         var canvas = document.getElementById('c');
         var ctx = canvas.getContext('2d');
+        var capture = document.getElementById('capture');
 
         // Effects
         var faceEffect = document.getElementById('faceEffect');
         var isFaceEffectActive = false;
+
+        var bwEffect = document.getElementById('bwEffect');
+        var isBwEffectActive = false;
 
         start.addEventListener('click', function (e) {
             var address = document.getElementById('address').value;
@@ -69,9 +73,13 @@
                 ctx.fillRect(0, 0, w, h);
                 ctx.drawImage(video, 0, 0, w, h);
 
-                // if (isFaceEffectActive) {
-                //     detectFace(canvas);
-                // }
+                if (isFaceEffectActive) {
+                    detectFace(canvas);
+                }
+
+                if (isBwEffectActive) {
+                    decolorize(canvas);
+                }
 
             }, 33);
         }, false);
@@ -79,6 +87,21 @@
         faceEffect.addEventListener('click', function () {
             console.log("Toggled face detection.");
             isFaceEffectActive = !isFaceEffectActive;
+            console.log(isFaceEffectActive);
+        }, false);
+
+        bwEffect.addEventListener('click', function () {
+            console.log("Toggled black and white.");
+            isBwEffectActive = !isBwEffectActive;
+            console.log(isBwEffectActive);
+        }, false);
+
+        capture.addEventListener('click', function () {
+            console.log("Clicked capture image.");
+            var link = document.getElementById('link');
+            link.setAttribute('download', 'freeuni-car-capture.png');
+            link.setAttribute('href', canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"));
+            link.click();
         }, false);
     });
 })();

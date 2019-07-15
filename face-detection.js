@@ -23,7 +23,7 @@ function detectFace(canvas) {
     if (!faceCascade) {
         console.log("Creating the Face cascade classifier");
         faceCascade = new cv.CascadeClassifier();
-        faceCascade.load('../../test/data/haarcascade_frontalface_default.xml');
+        faceCascade.load('haarcascade_frontalface_default.xml');
     }
 
     var ctx = canvas.getContext('2d');
@@ -59,5 +59,19 @@ function detectFace(canvas) {
     img.delete();
     imgColor.delete();
     faces.delete();
+    imgGray.delete();
+}
+
+function decolorize(canvas) {
+    console.log("decolorize");
+    var ctx = canvas.getContext('2d');
+    var input = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    var img = cv.matFromArray(input, 24); // 24 for rgba
+    var imgGray = new cv.Mat();
+
+    cv.cvtColor(img, imgGray, cv.ColorConversionCodes.COLOR_RGBA2GRAY.value, 0);
+
+    showImage(imgGray, canvas);
+    img.delete();
     imgGray.delete();
 }
