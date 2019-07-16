@@ -3,13 +3,18 @@ import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(7, GPIO.OUT)
 
-def update_headlight(data):
+def update_headlights(data):
 	data = data.decode('utf-8').lower()
-	index = data.indexOf(' ')
-	first_word = data.substring(0, index)
+	first_word = data.split()[0]
 
 	if ("headlights" == first_word):
-		if ("true" in data.substring(index))
+<<<<<<< HEAD
+		if ("true" in data):
 			GPIO.output(7, GPIO.HIGH)
-		else if ("false" in data.substring(index)):
+		else if ("false" in data):
+=======
+		if ("true" in data.substring(index)):
+			GPIO.output(7, GPIO.HIGH)
+		elif ("false" in data.substring(index)):
+>>>>>>> d375052165541f78ca715f58db8167c71978b8bd
 			GPIO.output(7, GPIO.LOW)

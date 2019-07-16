@@ -122,8 +122,9 @@ var locationString = "Not yet known";
 
         headlightsEffect.addEventListener('click', function () {
             isHlEffectActive = !isHlEffectActive;
+            var dt = "headlights " + isHlEffectActive;
             datachannel.send("headlights " + isHlEffectActive);
-            console.log("Toggled headlights.");
+            console.log(dt);
         }, false);
     });
 })();
