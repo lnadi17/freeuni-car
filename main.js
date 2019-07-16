@@ -1,7 +1,7 @@
-var locationString = "oe";
+var locationString = "Not yet known";
+
 (function () {
     var signalObj = null;
-    
 
     window.addEventListener('DOMContentLoaded', function () {
         var isStreaming = false;
@@ -12,7 +12,6 @@ var locationString = "oe";
         var ctx = canvas.getContext('2d');
         var capture = document.getElementById('capture');
 
-
         // Effects
         var faceEffect = document.getElementById('faceEffect');
         var isFaceEffectActive = false;
@@ -22,6 +21,9 @@ var locationString = "oe";
 
         var locationEffect = document.getElementById('locationEffect');
         var isLocEffectActive = false;
+
+        var headlightsEffect = document.getElementById('headlightsEffect');
+        var isHlEffectActive = false;
 
         start.addEventListener('click', function (e) {
             var address = document.getElementById('address').value;
@@ -116,7 +118,13 @@ var locationString = "oe";
 
         locationEffect.addEventListener('click', function () {
             isLocEffectActive = !isLocEffectActive;
-            console.log("Toggled location");
+            console.log("Toggled location.");
+        }, false);
+
+        headlightsEffect.addEventListener('click', function () {
+            isHlEffectActive = !isHlEffectActive;
+            datachannel.send("headlights: " + isHlEffectActive);
+            console.log("Toggled headlights.");
         }, false);
     });
 })();
