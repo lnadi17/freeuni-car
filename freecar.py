@@ -4,6 +4,7 @@ import os
 from engine import *
 from find import *
 from threading import Thread, Event
+from headlights import *
 
 SOCKET_PATH='/tmp/uv4l.socket'
 
