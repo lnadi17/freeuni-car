@@ -63,7 +63,6 @@ function detectFace(canvas) {
 }
 
 function decolorize(canvas) {
-    console.log("decolorize");
     var ctx = canvas.getContext('2d');
     var input = ctx.getImageData(0, 0, canvas.width, canvas.height);
     var img = cv.matFromArray(input, 24); // 24 for rgba
@@ -77,11 +76,6 @@ function decolorize(canvas) {
 }
 
 function drawLocation(canvas, locationString) {
-    // var p = document.createElement("P");
-    // var node = document.createTextNode("Location: " + locationString);
-    // p.appendChild(node);
-    // p.styleLeft = "50vw";
-    // canvas.
     var ctx = canvas.getContext('2d');
     ctx.font = '23px Times New Roman';
     ctx.textAlign ='center';
@@ -90,4 +84,22 @@ function drawLocation(canvas, locationString) {
     ctx.fillStyle = 'white';  // a color name or by using rgb/rgba/hex values
     ctx.fillText('Location: ' + locationString, canvas.width / 2, 10); // text and position
     ctx.strokeText('Location: ' + locationString, canvas.width / 2, 10); // text and position
+}
+
+function computeBrightness(canvas) {
+    var ctx = canvas.getContext('2d');
+    var input = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    var img = cv.matFromArray(input, 24); // 24 for rgba
+
+    var brightness = 0;
+    for (var i = 0; i < canvas.width; i++) {
+        for (var j = 0; j < canvas.height; j++) {
+            let R = img.ucharAt(i, j * img.channels());
+            let G = img.ucharAt(i, j * img.channels() + 1);
+            let B = img.ucharAt(i, j * img.channels() + 2);
+            brightness = brightness + (R + G + B) / 3;
+        }
+    }
+    brightness = brightness / 3;
+    console.log(brightness);
 }
