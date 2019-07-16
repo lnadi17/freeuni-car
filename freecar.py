@@ -43,6 +43,7 @@ while True:
             print("Received message: %s" % data)
             
             run_engine_with_keyboard_input(data)
+            update_headlights(data)
 
             time.sleep(0.01)
     finally:
