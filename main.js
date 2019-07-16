@@ -92,7 +92,6 @@ var locationString = "Not yet known";
                 if (isLocEffectActive) {
                     drawLocation(canvas, locationString);
                 }
-
             }, 33);
         }, false);
 
@@ -123,7 +122,7 @@ var locationString = "Not yet known";
 
         headlightsEffect.addEventListener('click', function () {
             isHlEffectActive = !isHlEffectActive;
-            datachannel.send("headlights: " + isHlEffectActive);
+            datachannel.send("headlights " + isHlEffectActive);
             console.log("Toggled headlights.");
         }, false);
     });
