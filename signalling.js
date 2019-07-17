@@ -78,19 +78,16 @@ function signal(url, onStream, onError, onClose, onMessage) {
 
 
                 datachannel.onmessage = function (event) {
-                    console.log("got message:", event.data);
                     var msg = event.data.split(" ");
                     // Change location string
                     if (msg[0] == 'location') {
                         locationString = msg[2];
-                        console.log("new message: ", locationString);
                     } else if (msg[0] == 'tracking') {
                         if (msg[1] == 'True') {
                             isDangerForward = true;
                         } else {
                             isDangerForward = false;
                         }
-                        console.log("new message: ", isDangerForward);
                     }
                 }
             };

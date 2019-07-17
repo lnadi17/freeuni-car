@@ -88,20 +88,22 @@ function drawLocation(canvas, locationString) {
 
 function computeBrightness(canvas) {
     var ctx = canvas.getContext('2d');
-    var input = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    var img = cv.matFromArray(input, 24); // 24 for rgba
+    var imdata = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    var mat = cv.matFromArray(imdata, 24); // 24 for rgba
+
+    var data = mat.data(); // output is a Uint8Array that aliases directly into the Emscripten heap
+    var channels = mat.channels();
 
     var brightness = 0;
-    for (var i = 0; i < canvas.width; i++) {
-        for (var j = 0; j < canvas.height; j++) {
-            let R = img.ucharAt(i, j * img.channels());
-            let G = img.ucharAt(i, j * img.channels() + 1);
-            let B = img.ucharAt(i, j * img.channels() + 2);
-            brightness = brightness + (R + G + B) / 3;
-        }
+
+    for (var i = 0, j = 0; i < data.length; i += channels, j += 3) {
+        let r = imdata.data[j];
+        let g = imdata.data[j + 1];
+        let b = imdata.data[j + 2];
+        brightness += (r + g + b) / 3;
     }
-    brightness = brightness / 3;
-    console.log(brightness);
+
+    console.log(brightness / data.length);
 }
 
 function drawDanger(canvas) {
@@ -112,5 +114,5 @@ function drawDanger(canvas) {
     ctx.strokeStyle = 'black';  // a color name or by using rgb/rgba/hex values
     ctx.fillStyle = 'red';  // a color name or by using rgb/rgba/hex values
     ctx.fillText('Danger Ahead!', 10, 10); // text and position
-    ctx.strokeText('Danger Ahead!' + locationString, 10, 10); // text and position
+    ctx.strokeText('Danger Ahead!', 10, 10); // text and position
 }

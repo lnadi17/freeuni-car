@@ -44,7 +44,7 @@ while True:
 
             print("Received message: %s" % data)
             
-            if (danger_forward(data) or danger_backward(data)):
+            if (is_danger_forward(connection) or is_danger_backward(connection)):
                 stop_engine()
             else:
                 run_engine_with_keyboard_input(data)

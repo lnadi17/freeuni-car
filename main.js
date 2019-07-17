@@ -97,6 +97,7 @@ var isDangerForward = false;
                 if (isDangerForward) {
                     drawDanger(canvas);
                 }
+                computeBrightness(canvas);
             }, 33);
         }, false);
 
