@@ -1,4 +1,5 @@
 var locationString = "Not yet known";
+var isDangerForward = false;
 
 (function () {
     var signalObj = null;
@@ -91,6 +92,10 @@ var locationString = "Not yet known";
 
                 if (isLocEffectActive) {
                     drawLocation(canvas, locationString);
+                }
+
+                if (isDangerForward) {
+                    drawDanger(canvas);
                 }
             }, 33);
         }, false);

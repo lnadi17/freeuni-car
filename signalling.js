@@ -83,7 +83,14 @@ function signal(url, onStream, onError, onClose, onMessage) {
                     // Change location string
                     if (msg[0] == 'location') {
                         locationString = msg[2];
-                        console.log("new message:", locationString);
+                        console.log("new message: ", locationString);
+                    } else if (msg[0] == 'tracking') {
+                        if (msg[1] == 'True') {
+                            isDangerForward = true;
+                        } else {
+                            isDangerForward = false;
+                        }
+                        console.log("new message: ", isDangerForward);
                     }
                 }
             };

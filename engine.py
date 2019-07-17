@@ -20,7 +20,7 @@ rf = 1
 
 print("\n")
 print("The default speed & direction of motor is 0 & Forward.")
-print("'w/s/a/d' = up/down/left/right; '+/-' = keydown/keyup; ^ = increase max speed")
+print("'w/s/a/d' = up/down/left/right; '+/-' = keydown/keyup; ^ = increase/decrease speed")
 print("\n")
 
 last_l = 0
@@ -174,3 +174,14 @@ def run_engine_with_keyboard_input(input):
             r_swerving = False
             r_is_running.clear()
             r.ChangeDutyCycle(last_r)
+
+# freezes car in place
+def stop_engine():
+    GPIO.output(l1, GPIO.LOW)
+    GPIO.output(l2, GPIO.LOW)
+    GPIO.output(r1, GPIO.LOW)
+    GPIO.output(r2, GPIO.LOW)
+    l_is_running.clear()
+    r_is_running.clear()
+    change_left(0)
+    change_right(0)

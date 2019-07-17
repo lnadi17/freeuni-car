@@ -103,3 +103,14 @@ function computeBrightness(canvas) {
     brightness = brightness / 3;
     console.log(brightness);
 }
+
+function drawDanger(canvas) {
+    var ctx = canvas.getContext('2d');
+    ctx.font = '30px Times New Roman';
+    ctx.textAlign ='left';
+    ctx.textBaseline = 'top';
+    ctx.strokeStyle = 'black';  // a color name or by using rgb/rgba/hex values
+    ctx.fillStyle = 'red';  // a color name or by using rgb/rgba/hex values
+    ctx.fillText('Danger Ahead!', 10, 10); // text and position
+    ctx.strokeText('Danger Ahead!' + locationString, 10, 10); // text and position
+}
