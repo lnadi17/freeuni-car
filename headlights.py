@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(7, GPIO.OUT)
+GPIO.setup(4, GPIO.OUT)
 
 def update_headlights(data):
 	data = data.decode('utf-8').lower()
@@ -9,6 +9,6 @@ def update_headlights(data):
 
 	if ("headlights" == first_word):
 		if ("true" in data):
-			GPIO.output(7, GPIO.HIGH)
+			GPIO.output(4, GPIO.HIGH)
 		elif ("false" in data):
-			GPIO.output(7, GPIO.LOW)
+			GPIO.output(4, GPIO.LOW)
