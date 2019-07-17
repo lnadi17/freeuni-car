@@ -10,8 +10,6 @@ def update_headlights(data):
 	if ("headlights" == first_word):
 		print("headlights")
 		if ("true" in data):
-			print("true")
 			GPIO.output(4, GPIO.HIGH)
 		elif ("false" in data):
-			print("false")
 			GPIO.output(4, GPIO.LOW)
