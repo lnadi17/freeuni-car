@@ -16,7 +16,7 @@ try:
 except OSError:
     if os.path.exists(SOCKET_PATH):
         raise
-    
+
 s = socket.socket(socket.AF_UNIX, socket.SOCK_SEQPACKET)
 
 print("SOCKET_PATH: %s" % SOCKET_PATH)
@@ -43,12 +43,12 @@ while True:
                 break;
 
             print("Received message: %s" % data)
-            
-            if (is_danger_forward(connection) or is_danger_backward(connection)):
+
+            if (is_danger_forward(connection)):
                 stop_engine()
             else:
                 run_engine_with_keyboard_input(data)
-                
+
             update_headlights(data)
 
             time.sleep(0.01)
@@ -56,4 +56,3 @@ while True:
         find_event.clear()
         GPIO.cleanup()
         connection.close()
-
