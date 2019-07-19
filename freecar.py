@@ -32,8 +32,8 @@ while True:
         gpio_setup()
 
         find_event.set()
-        l_decrease_thread = Thread(target=update_location, args=(find_event, connection,))
-        l_decrease_thread.start()
+        location_thread = Thread(target=update_location, args=(find_event, connection,))
+        location_thread.start()
 
         while True:
             data = connection.recv(16)
