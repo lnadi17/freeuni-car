@@ -45,8 +45,11 @@ while True:
             print("Received message: %s" % data)
 
             if (is_danger_forward(connection)):
+                print("here 1")
                 stop_engine()
+
             else:
+                print("here 2")
                 run_engine_with_keyboard_input(data)
 
             update_headlights(data)
