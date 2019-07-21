@@ -32,8 +32,15 @@ while True:
         gpio_setup()
 
         find_event.set()
+
         location_thread = Thread(target=update_location, args=(find_event, connection,))
         location_thread.start()
+
+        danger_thread_foward = Thread(target=is_danger_forward, args=(connection,))
+        danger_thread_foward.start()
+
+#        danger_thread_backward = Thread(target=is_danger_backward, args=(connection,))
+#        danger_thread_backward.start()
 
         while True:
             data = connection.recv(16)
@@ -44,15 +51,7 @@ while True:
 
             print("Received message: %s" % data)
             update_headlights(data)
-
-            if (is_danger_forward(connection)):
-                print("here 1")
-                stop_engine()
-
-            else:
-                print("here 2")
-                run_engine_with_keyboard_input(data)
-
+            run_engine_with_keyboard_input(data)
             time.sleep(0.01)
     finally:
         find_event.clear()
