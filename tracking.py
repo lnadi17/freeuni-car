@@ -10,13 +10,11 @@ def is_danger_forward(connection):
 	message = b'tracking '
 
 	if (GPIO.input(tracker_pin_fwd) == GPIO.LOW):
-		print("rame")
 		boolean = b'True'
 		message = message + boolean
 		connection.sendall(message)
 		return True
 	else:
-		print("rameFFF")
 		boolean = b'False'
 		message = message + boolean
 		connection.sendall(message)

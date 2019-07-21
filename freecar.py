@@ -43,6 +43,7 @@ while True:
                 break;
 
             print("Received message: %s" % data)
+            update_headlights(data)
 
             if (is_danger_forward(connection)):
                 print("here 1")
@@ -51,8 +52,6 @@ while True:
             else:
                 print("here 2")
                 run_engine_with_keyboard_input(data)
-
-            update_headlights(data)
 
             time.sleep(0.01)
     finally:
