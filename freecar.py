@@ -39,6 +39,7 @@ while True:
         danger_thread_foward = Thread(target=is_danger_forward, args=(connection,))
         danger_thread_foward.start()
 
+
 #        danger_thread_backward = Thread(target=is_danger_backward, args=(connection,))
 #        danger_thread_backward.start()
 
