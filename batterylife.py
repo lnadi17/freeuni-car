@@ -1,3 +1,4 @@
+import time
 import board
 import busio
 i2c = busio.I2C(board.SCL, board.SDA)
@@ -19,6 +20,7 @@ def battery_percentage(connection):
 		battery_percentage = "%.3f" % battery_percentage
 		message = message + bytes(battery_percentage, 'utf-8')
 		connection.sendall(message)
+		time.sleep(60)
 
 
 
