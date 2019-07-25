@@ -2,16 +2,10 @@ import RPi.GPIO as GPIO
 from engine import *
 import time
 
-tracker_pin_fwd = 25
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(tracker_pin_fwd, GPIO.IN)
-
-
-
 def is_danger_forward(connection):
 	while True:
-		message = b'tracking '
 		dist = distance()
+		message = b'tracking '
 		if (dist > 13):
 			stop_engine()
 			boolean = b'True'
@@ -23,46 +17,36 @@ def is_danger_forward(connection):
 			connection.sendall(message)
 		time.sleep(0.01)
 
-GPIO_TRIGGER = 18
-GPIO_ECHO = 2
-
-#set GPIO direction (IN / OUT)
-GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
-GPIO.setup(GPIO_ECHO, GPIO.IN)
-
 def distance():
     # set Trigger to HIGH
-	GPIO.output(GPIO_TRIGGER, True)
+	GPIO.output(18, True)
 
 	# set Trigger after 0.01ms to LOW
 	time.sleep(0.00001)
-	GPIO.output(GPIO_TRIGGER, False)
+	GPIO.output(18, False)
 
-	StartTime = time.time()
-	startTm = StartTime
-	StopTime = time.time()
-	stopTm = StartTime
+	start_time = time.time()
+	start_time_t = start_time
 
+	stop_time = time.time()
+	stop_time_t = start_time
 
-	# save StartTime
-	while GPIO.input(GPIO_ECHO) == 0:
-		 StartTime = time.time()
-		 if(StartTime - startTm	 > 0.1):
-			 stopTm = StartTime
-			 return -7
+	# Save start time
+	while GPIO.input(2) == 0:
+		 start_time = time.time()
+		 if (start_time - start_time_t > 0.1):
+			# stop_time_t = start_time
+			return -1
 
-    # save time of arrival
-	while GPIO.input(GPIO_ECHO) == 1:
-		StopTime = time.time()
-		if(StopTime - stopTm > 0.1):
-			GPIO.output(GPIO_TRIGGER, True)
+    # Save time of arrival
+	while GPIO.input(2) == 1:
+		stop_time = time.time()
+		if (stop_time - start_time > 0.1):
+			# GPIO.output(18, True)
 			break
 
-
     # time difference between start and arrival
-	TimeElapsed = StopTime - StartTime
-    # multiply with the sonic speed (34300 cm/s)
-    # and divide by 2, because there and back
-	distance = (TimeElapsed * 34300) / 2
+	time_elapsed = stop_time - start_time
+	distance = (time_elapsed * 34300) / 2
 
 	return distance

@@ -53,6 +53,11 @@ def gpio_setup():
     # Headlights
     GPIO.setup(4,GPIO.OUT)
 
+    # Tracking
+    GPIO.setup(18, GPIO.OUT)
+    GPIO.setup(2, GPIO.IN)
+    GPIO.setup(25, GPIO.IN)
+
 gpio_setup()
 
 l=GPIO.PWM(l_en,1000)
