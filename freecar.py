@@ -6,6 +6,7 @@ from find import *
 from tracking import *
 from threading import Thread, Event
 from headlights import *
+from batterylife import *
 
 SOCKET_PATH='/tmp/uv4l.socket'
 
@@ -38,6 +39,10 @@ while True:
 
         danger_thread_foward = Thread(target=is_danger_forward, args=(connection,))
         danger_thread_foward.start()
+
+        battery_thread = Thread(target=battery_percentage, args=(connection,))
+        battery_thread.start()
+
 
 #        danger_thread_backward = Thread(target=is_danger_backward, args=(connection,))
 #        danger_thread_backward.start()
