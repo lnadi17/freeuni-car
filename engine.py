@@ -50,6 +50,9 @@ def gpio_setup():
     GPIO.output(r1,GPIO.LOW)
     GPIO.output(r2,GPIO.LOW)
 
+    # Headlights
+    GPIO.setup(4,GPIO.OUT)
+
 gpio_setup()
 
 l=GPIO.PWM(l_en,1000)

@@ -25,7 +25,8 @@ var isDangerForward = false;
 
         var headlightsEffect = document.getElementById('headlightsEffect');
         var isHlEffectActive = false;
-        var headlightsEffect = document.getElementById('lineEffect');
+
+        var lineEffect = document.getElementById('lineEffect');
         var isLineEffectActive = false;
 
         start.addEventListener('click', function (e) {
@@ -85,11 +86,7 @@ var isDangerForward = false;
                 ctx.drawImage(video, 0, 0, w, h);
 
                 if (isLineEffectActive) {
-                    drawLines(canvas);
-                }
-
-                if (isFaceEffectActive) {
-                    detectFace(canvas);
+                    detectLines(canvas);
                 }
 
                 if (isBwEffectActive) {
@@ -107,12 +104,6 @@ var isDangerForward = false;
                 //computeBrightness(canvas);
             }, 33);
         }, false);
-
-        // faceEffect.addEventListener('click', function () {
-        //     console.log("Toggled face detection.");
-        //     isFaceEffectActive = !isFaceEffectActive;
-        //     console.log(isFaceEffectActive);
-        // }, false);
 
         bwEffect.addEventListener('click', function () {
             console.log("Toggled black and white.");
@@ -138,6 +129,11 @@ var isDangerForward = false;
             var dt = "headlights " + isHlEffectActive;
             datachannel.send("headlights " + isHlEffectActive);
             console.log(dt);
+        }, false);
+
+        lineEffect.addEventListener('click', function () {
+            isLineEffectActive = !isLineEffectActive;
+            console.log("Toggled line.");
         }, false);
     });
 })();

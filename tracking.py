@@ -13,7 +13,6 @@ def is_danger_forward(connection):
 		message = b'tracking '
 		dist = distance()
 		if (dist > 13):
-			print("Measured  Distance = %.1f cm" % dist)
 			stop_engine()
 			boolean = b'True'
 			message = message + boolean
@@ -23,9 +22,6 @@ def is_danger_forward(connection):
 			message = message + boolean
 			connection.sendall(message)
 		time.sleep(0.01)
-
-
-
 
 GPIO_TRIGGER = 18
 GPIO_ECHO = 2
