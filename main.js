@@ -25,6 +25,8 @@ var isDangerForward = false;
 
         var headlightsEffect = document.getElementById('headlightsEffect');
         var isHlEffectActive = false;
+        var headlightsEffect = document.getElementById('lineEffect');
+        var isLineEffectActive = false;
 
         start.addEventListener('click', function (e) {
             var address = document.getElementById('address').value;
@@ -82,6 +84,10 @@ var isDangerForward = false;
                 ctx.fillRect(0, 0, w, h);
                 ctx.drawImage(video, 0, 0, w, h);
 
+                if (isLineEffectActive) {
+                    drawLines(canvas);
+                }
+
                 if (isFaceEffectActive) {
                     detectFace(canvas);
                 }
@@ -97,7 +103,8 @@ var isDangerForward = false;
                 if (isDangerForward) {
                     drawDanger(canvas);
                 }
-                computeBrightness(canvas);
+                
+                //computeBrightness(canvas);
             }, 33);
         }, false);
 

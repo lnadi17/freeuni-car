@@ -116,3 +116,15 @@ function drawDanger(canvas) {
     ctx.fillText('Danger Ahead!', 10, 10); // text and position
     ctx.strokeText('Danger Ahead!', 10, 10); // text and position
 }
+
+function detectLines(canvas) {
+    var ctx = canvas.getContext('2d');
+    var input = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    var img = cv.matFromArray(input, 24); // 24 for rgba
+    var hsvImg = cv.cvtColor(img, imgGray, cv.ColorConversionCodes.COLOR_RGBA2GRAY.value, 0);
+
+
+    showImage(imgColor, canvas);
+
+    img.delete();
+}
