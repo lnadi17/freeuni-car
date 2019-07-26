@@ -34,6 +34,7 @@ while True:
         gpio_setup()
 
         find_event.set()
+        danger_event.set()
 
         location_thread = Thread(target=update_location, args=(find_event, connection,))
         location_thread.start()

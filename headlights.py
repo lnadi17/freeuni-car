@@ -5,7 +5,6 @@ def update_headlights(data):
 	first_word = data.split()[0]
 
 	if ("headlights" == first_word):
-		print("headlights")
 		if ("true" in data):
 			GPIO.output(4, GPIO.HIGH)
 		elif ("false" in data):

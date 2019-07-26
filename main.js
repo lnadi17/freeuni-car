@@ -29,6 +29,9 @@ var isDangerForward = false;
         var lineEffect = document.getElementById('lineEffect');
         var isLineEffectActive = false;
 
+        var safetyEffect = document.getElementById('safetyEffect');
+        var isSafetyEffectActive = false;
+
         start.addEventListener('click', function (e) {
             var address = document.getElementById('address').value;
             var protocol = location.protocol === "https:" ? "wss:" : "ws:";
@@ -97,7 +100,7 @@ var isDangerForward = false;
                     drawLocation(canvas, locationString);
                 }
 
-                if (isDangerForward) {
+                if (isSafetyEffectActive && isDangerForward) {
                     drawDanger(canvas);
                 }
                 
@@ -134,6 +137,11 @@ var isDangerForward = false;
         lineEffect.addEventListener('click', function () {
             isLineEffectActive = !isLineEffectActive;
             console.log("Toggled line.");
+        }, false);
+
+        safetyEffect.addEventListener('click', function () {
+            isSafetyEffectActive = !isSafetyEffectActive;
+            console.log("Toggled safety.");
         }, false);
     });
 })();
