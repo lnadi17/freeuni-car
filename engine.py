@@ -55,7 +55,7 @@ def gpio_setup():
 
     # Tracking
     GPIO.setup(18, GPIO.OUT)
-    GPIO.setup(2, GPIO.IN)
+    GPIO.setup(17, GPIO.IN)
     GPIO.setup(25, GPIO.IN)
 
 gpio_setup()

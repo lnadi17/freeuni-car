@@ -11,7 +11,7 @@ function decolorize(canvas) {
 
 function drawLocation(canvas, locationString) {
     var ctx = canvas.getContext('2d');
-    ctx.font = '23px Times New Roman';
+    ctx.font = '23px Abel';
     ctx.textAlign ='center';
     ctx.textBaseline = 'top';
     ctx.strokeStyle = 'black';  // a color name or by using rgb/rgba/hex values
@@ -20,35 +20,52 @@ function drawLocation(canvas, locationString) {
     ctx.strokeText('Location: ' + locationString, canvas.width / 2, 10); // text and position
 }
 
-function computeBrightness(canvas) {
-    var ctx = canvas.getContext('2d');
-    var imdata = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    var mat = cv.matFromArray(imdata, 24); // 24 for rgba
+function drawBrightness(canvas) {
+    var img = cv.imread(canvas)
+    var imgRgb = new cv.Mat();
+    var imgGray = new cv.Mat();
 
-    var data = mat.data(); // output is a Uint8Array that aliases directly into the Emscripten heap
-    var channels = mat.channels();
+    cv.cvtColor(img, imgGray, cv.COLOR_RGBA2GRAY, 0);
+    var srcVec = new cv.MatVector();
+    srcVec.push_back(imgGray);
+
+    var hist = new cv.Mat();
+    var mask = new cv.Mat();
+    // You can try more different parameters
+    cv.calcHist(srcVec, [0], mask, hist, [256], [0, 255], false);
+    let result = cv.minMaxLoc(hist, mask);
+    let max = result.maxVal;
 
     var brightness = 0;
-
-    for (var i = 0, j = 0; i < data.length; i += channels, j += 3) {
-        let r = imdata.data[j];
-        let g = imdata.data[j + 1];
-        let b = imdata.data[j + 2];
-        brightness += (r + g + b) / 3;
+    for (let i = 0; i < 256; i++) {
+        let binVal = hist.data32F[i] * img.rows / max;
+        brightness += binVal;
     }
 
-    console.log(brightness / data.length);
+    brightness = brightness / 256;
+    if (brightness > 100) {
+        brightness = 100;
+    }
+
+    console.log(brightness);
+
+    img.delete();
+    imgGray.delete();
+    imgRgb.delete();
+    srcVec.delete();
+    hist.delete();
+    mask.delete();
 }
 
 function drawDanger(canvas) {
     var ctx = canvas.getContext('2d');
-    ctx.font = '30px Times New Roman';
+    ctx.font = '30px Abel';
     ctx.textAlign ='left';
     ctx.textBaseline = 'top';
-    ctx.strokeStyle = 'black';  // a color name or by using rgb/rgba/hex values
     ctx.fillStyle = 'red';  // a color name or by using rgb/rgba/hex values
     ctx.fillText('Danger Ahead!', 10, 10); // text and position
-    ctx.strokeText('Danger Ahead!', 10, 10); // text and position
+    // ctx.strokeStyle = 'black';  // a color name or by using rgb/rgba/hex values
+    // ctx.strokeText('Danger Ahead!', 10, 10); // text and position
 }
 
 var r_l_h = 0
@@ -75,11 +92,11 @@ function detectLines(canvas) {
     var redMask = new cv.Mat();
     var magentaMask = new cv.Mat();
 
-    let lowRed = new cv.Mat(hsvImg.rows, hsvImg.cols, hsvImg.type(), [r_l_h, r_l_s, r_l_v, 0]);
-    let highRed = new cv.Mat(hsvImg.rows, hsvImg.cols, hsvImg.type(), [r_u_h, r_u_s, r_u_v, 255]);
+    var lowRed = new cv.Mat(hsvImg.rows, hsvImg.cols, hsvImg.type(), [r_l_h, r_l_s, r_l_v, 0]);
+    var highRed = new cv.Mat(hsvImg.rows, hsvImg.cols, hsvImg.type(), [r_u_h, r_u_s, r_u_v, 255]);
 
-    let lowMagenta = new cv.Mat(hsvImg.rows, hsvImg.cols, hsvImg.type(), [174, r_l_s, r_l_v, 0]);
-    let highMagenta = new cv.Mat(hsvImg.rows, hsvImg.cols, hsvImg.type(), [255, r_u_s, r_u_v, 255]);
+    var lowMagenta = new cv.Mat(hsvImg.rows, hsvImg.cols, hsvImg.type(), [174, r_l_s, r_l_v, 0]);
+    var highMagenta = new cv.Mat(hsvImg.rows, hsvImg.cols, hsvImg.type(), [255, r_u_s, r_u_v, 255]);
 
     cv.inRange(hsvImg, lowRed, highRed, redMask);
     cv.inRange(hsvImg, lowMagenta, highMagenta, magentaMask);

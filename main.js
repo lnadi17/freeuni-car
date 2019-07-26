@@ -60,6 +60,8 @@ var isDangerForward = false;
             }
         }, false);
 
+
+
         stop.addEventListener('click', function (e) {
             if (signalObj) {
                 signalObj.hangup();
@@ -104,8 +106,14 @@ var isDangerForward = false;
                     drawDanger(canvas);
                 }
                 
-                //computeBrightness(canvas);
             }, 33);
+
+            setInterval(function () {
+                if (video.paused || video.ended) {
+                    return;
+                }
+                drawBrightness(canvas); 
+            }, 1000);
         }, false);
 
         bwEffect.addEventListener('click', function () {
