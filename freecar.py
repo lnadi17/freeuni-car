@@ -11,6 +11,7 @@ from headlights import *
 SOCKET_PATH='/tmp/uv4l.socket'
 
 find_event = Event()
+danger_event = Event()
 
 try:
     os.unlink(SOCKET_PATH)
@@ -37,7 +38,7 @@ while True:
         location_thread = Thread(target=update_location, args=(find_event, connection,))
         location_thread.start()
 
-        danger_thread_foward = Thread(target=is_danger_forward, args=(connection,))
+        danger_thread_foward = Thread(target=is_danger_forward, args=(danger_event, connection,))
         danger_thread_foward.start()
 
         # battery_thread = Thread(target=battery_percentage, args=(connection,))
@@ -56,5 +57,6 @@ while True:
             time.sleep(0.01)
     finally:
         find_event.clear()
+        danger_event.clear()
         GPIO.cleanup()
         connection.close()
