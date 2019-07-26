@@ -20,6 +20,7 @@ def battery_percentage(connection):
 		battery_percentage = "%.3f" % battery_percentage
 		message = message + bytes(battery_percentage, 'utf-8')
 		connection.sendall(message)
+		print(battery_percentage+" and "+battery_voltage)
 		time.sleep(60)
 
 
