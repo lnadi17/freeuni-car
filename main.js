@@ -144,6 +144,7 @@ var isDangerForward = false;
 
         lineEffect.addEventListener('click', function () {
             isLineEffectActive = !isLineEffectActive;
+            datachannel.send("charging " + isLineEffectActive);
             console.log("Toggled line.");
         }, false);
 
