@@ -49,7 +49,7 @@ while True:
         # battery_thread.start()
 
         while True:
-            data = connection.recv(16)
+            data = connection.recv(32)
 
             if not data:
                 print("No data")

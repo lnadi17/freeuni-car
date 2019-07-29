@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 from numpy import sqrt
+from engine import l, r
 from time import sleep
 
 charging = False
@@ -13,9 +14,6 @@ r1 = 20
 r2 = 21
 r_en = 19
 rf = 1
-
-l = GPIO.PWM(l_en, 1000)
-r = GPIO.PWM(r_en, 1000)
 
 turn_time = 1
 
@@ -121,11 +119,18 @@ def follow_lines(data):
     # Parse data
     data = data.decode('utf-8').split()
 
-    if (data[0] is not 'line'):
-        print("No line data")
-        break
+    if (data[0] != 'line'):
+        return
 
-    if (data[1] is 'no'):
-        break
+    if (data[1] == 'no'):
+        print("no line data")
+        return
 
-    # y0, y1 = get_average_line([green_line, red_line]) # x is considered 640
+    red_line = list(map(int, data[1].split(",")))
+    green_line = list(map(int, data[2].split(",")))
+
+    y0, y1 = get_average_line(red_line, green_line)  # x is considered 640
+    k = (y1 - y0) / 640
+
+    left(0.5)
+    sleep(10)

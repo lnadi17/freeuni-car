@@ -116,26 +116,24 @@ function detectLines(canvas) {
     var gContours = new cv.MatVector();
     var hierarchy = new cv.Mat();
 
-    redCoords = cv.findContours(fullRedMask, rContours, hierarchy, cv.RETR_CCOMP, cv.CHAIN_APPROX_SIMPLE);
-    greenCoords = cv.findContours(greenMask, gContours, hierarchy, cv.RETR_CCOMP, cv.CHAIN_APPROX_SIMPLE);
-
-    if ((lefty < 2147483647 && righty < 2147483647) && (lefty > -241748367 && righty > -241748367)) {
-        console.log("line " + redCoords + " " + greenCoords);
-        datachannel.send("line " + redCoords + " " + greenCoords);
-    } else {
-        console.log("line no");
-        datachannel.send("line no");
-    }
+    cv.findContours(fullRedMask, rContours, hierarchy, cv.RETR_CCOMP, cv.CHAIN_APPROX_SIMPLE);
+    cv.findContours(greenMask, gContours, hierarchy, cv.RETR_CCOMP, cv.CHAIN_APPROX_SIMPLE);
 
     // Draw approximate contours
     var mask;
-    if (rContours.size() > 0) {
-        drawLine(img, rContours, "r");
+    if (rContours.size() > 0 && gContours.size() > 0) {
+        var redCoords = drawLine(img, rContours, "r");
+        var greenCoords = drawLine(img, gContours, "g");
+
+        if ((redCoords[0] < 2147483647 && redCoords[1] < 2147483647) && (greenCoords[0] > -241748367 && greenCoords[1] > -241748367)) {
+            datachannel.send("line " + redCoords + " " + greenCoords);
+        } else {
+            datachannel.send("line no");
+        }
     }
 
-    if (gContours.size() > 0) {
-        drawLine(img, gContours, "g");
-    }
+        
+    
 
     cv.imshow(canvas, img);
 
