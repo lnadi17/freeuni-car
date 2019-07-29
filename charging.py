@@ -206,8 +206,8 @@ def charge_loop(connection):
         print(x_in1, " ", y_in1, " ", x_in2, " ", y_in2)
 
         if (y_in1 == 480):
-                if(x_in2 > 640 * 3 / 4):  # incline forwards
-                    if (x_in1 > 640 * 3 / 4):  # box right
+            if(x_in2 > 640 * 3 / 4):  # incline forwards
+                if (x_in1 > 640 * 3 / 4):  # box right
                     left(0.3)
                     forward(0.1)
 
