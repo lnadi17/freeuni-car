@@ -116,8 +116,16 @@ function detectLines(canvas) {
     var gContours = new cv.MatVector();
     var hierarchy = new cv.Mat();
 
-    cv.findContours(fullRedMask, rContours, hierarchy, cv.RETR_CCOMP, cv.CHAIN_APPROX_SIMPLE);
-    cv.findContours(greenMask, gContours, hierarchy, cv.RETR_CCOMP, cv.CHAIN_APPROX_SIMPLE);
+    redCoords = cv.findContours(fullRedMask, rContours, hierarchy, cv.RETR_CCOMP, cv.CHAIN_APPROX_SIMPLE);
+    greenCoords = cv.findContours(greenMask, gContours, hierarchy, cv.RETR_CCOMP, cv.CHAIN_APPROX_SIMPLE);
+
+    if ((lefty < 2147483647 && righty < 2147483647) && (lefty > -241748367 && righty > -241748367)) {
+        console.log("line " + redCoords + " " + greenCoords);
+        datachannel.send("line " + redCoords + " " + greenCoords);
+    } else {
+        console.log("line no");
+        datachannel.send("line no");
+    }
 
     // Draw approximate contours
     var mask;
@@ -190,15 +198,12 @@ function drawLine(img, contours, color) {
     // lefty and righty should be between C++'s integer limit
     if ((lefty < 2147483647 && righty < 2147483647) && (lefty > -241748367 && righty > -241748367)) {
         cv.line(img, point1, point2, new cv.Scalar(0, 0, 0), 2, cv.LINE_AA, 0);
-        datachannel.send("line " + lefty + " " + righty + " " + color);
-    } else {
-        datachannel.send("line no");
     }
-
-    
 
     tmp.delete();
     polygon.delete();
     //mask.delete();
     line.delete();
+
+    return [lefty, righty];
 }
