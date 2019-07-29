@@ -1,5 +1,6 @@
 var locationString = "Not yet known";
 var isDangerForward = false;
+var lineGet = false;
 
 (function () {
     var signalObj = null;

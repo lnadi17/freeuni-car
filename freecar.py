@@ -7,12 +7,13 @@ from tracking import *
 from threading import Thread, Event
 from headlights import *
 from charging import *
-# from battery_life import *
+from battery_life import *
 
 SOCKET_PATH = '/tmp/uv4l.socket'
 
 find_event = Event()
 danger_event = Event()
+charging_event = Event()
 
 try:
     os.unlink(SOCKET_PATH)
@@ -36,6 +37,7 @@ while True:
 
         find_event.set()
         danger_event.set()
+        # charging_event.set()
 
         location_thread = Thread(
             target=update_location, args=(find_event, connection,))
@@ -45,8 +47,12 @@ while True:
             target=is_danger_forward, args=(danger_event, connection,))
         danger_thread_foward.start()
 
-        # battery_thread = Thread(target=battery_percentage, args=(connection,))
-        # battery_thread.start()
+        battery_thread = Thread(target=battery_percentage, args=(connection,))
+        battery_thread.start()
+
+        # charging_thread = Thread(
+        #     target=follow_lines(charge_event, connection,))
+        # charging_thread.start()
 
         while True:
             data = connection.recv(32)
@@ -58,10 +64,12 @@ while True:
             print("Received message: %s" % data)
 
             if (is_charging(data)):
-                follow_lines(data)
-            else:
-                update_headlights(data)
-                run_engine_with_keyboard_input(data)
+                charge_loop(connection)
+                print("loop finished")
+                time.sleep(0.01)
+                continue
+            update_headlights(data)
+            run_engine_with_keyboard_input(data)
 
             time.sleep(0.01)
     finally:

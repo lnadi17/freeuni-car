@@ -34,7 +34,7 @@ def distance(event):
     # Save start time
     start_time_t = start_time
     try:
-        while (event.is_set() and GPIO.input(2) == 0):
+        while (event.is_set() and GPIO.input(17) == 0):
             start_time = time.time()
             if (start_time - start_time_t > 0.1):
                 # print("entered start time loop")
@@ -42,7 +42,7 @@ def distance(event):
 
         # Save time of arrival
         stop_time_t = start_time
-        while (event.is_set() and GPIO.input(2) == 1):
+        while (event.is_set() and GPIO.input(17) == 1):
             stop_time = time.time()
             if (stop_time - stop_time_t > 0.1):
                 # print("entered stop time loop")

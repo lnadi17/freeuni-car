@@ -125,15 +125,16 @@ function detectLines(canvas) {
         var redCoords = drawLine(img, rContours, "r");
         var greenCoords = drawLine(img, gContours, "g");
 
-        if ((redCoords[0] < 2147483647 && redCoords[1] < 2147483647) && (greenCoords[0] > -241748367 && greenCoords[1] > -241748367)) {
-            datachannel.send("line " + redCoords + " " + greenCoords);
-        } else {
-            datachannel.send("line no");
-        }
+        if (lineGet) {
+            if ((redCoords[0] < 2147483647 && redCoords[1] < 2147483647) && (greenCoords[0] > -241748367 && greenCoords[1] > -241748367)) {
+                datachannel.send("line " + redCoords + " " + greenCoords);
+            } else {
+                datachannel.send("line no");
+            }
+            console.log("sent line")
+            lineGet = false;
+        }    
     }
-
-        
-    
 
     cv.imshow(canvas, img);
 

@@ -88,6 +88,13 @@ function signal(url, onStream, onError, onClose, onMessage) {
                         } else {
                             isDangerForward = false;
                         }
+                    } 
+
+                    if (msg[0] == 'line') {
+                        if (msg[1] == 'get') {
+                            console.log("line get")
+                            lineGet = true;
+                        }
                     }
                 }
             };

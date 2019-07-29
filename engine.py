@@ -57,7 +57,7 @@ def gpio_setup():
 
     # Tracking
     GPIO.setup(18, GPIO.OUT)
-    GPIO.setup(2, GPIO.IN)
+    GPIO.setup(17, GPIO.IN)
     GPIO.setup(25, GPIO.IN)
 
 gpio_setup()
@@ -68,17 +68,15 @@ r = GPIO.PWM(r_en, 1000)
 l.start(0)
 r.start(0)
 
+
 # Changes power of left wheel and saves its value
-
-
 def change_left(power):
     global last_l
     last_l = power
     l.ChangeDutyCycle(power)
 
+
 # Changes power of right wheel and saves its value
-
-
 def change_right(power):
     global last_r
     last_r = power
@@ -193,9 +191,8 @@ def run_engine_with_keyboard_input(input):
             r_is_running.clear()
             r.ChangeDutyCycle(last_r)
 
+
 # freezes car in place
-
-
 def stop_engine():
     GPIO.output(l1, GPIO.LOW)
     GPIO.output(l2, GPIO.LOW)
