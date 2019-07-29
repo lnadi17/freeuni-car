@@ -114,6 +114,62 @@ def get_average_line(line1, line2):
 
     return y0, y1
 
+def line_rect_inter(y0,k,r_width,r_height):
+    y_x_eq_0 = y0
+    y_x_eq_wid = k*r_width + y0
+    x_y_eq_0 = (0 - y0)/k
+    x_y_eq_height = (r_height - y0)/k
+
+    y_x_eq_0_b = false
+    y_x_eq_wid_b = false
+    x_y_eq_0_b = false
+    x_y_eq_height_b = false
+
+    if(y_x_eq_0  >= 0 and y_x_eq_0 <= r_height ):
+        y_x_eq_0_b = true
+
+    if(y_x_eq_wid  >= 0 and y_x_eq_wid <= r_height ):
+        y_x_eq_wid_b = true
+
+    if(x_y_eq_0  >= 0 and x_y_eq_0 <= r_width ):
+        x_y_eq_0_b = true
+
+    if(x_y_eq_height  >= 0 and x_y_eq_height <=r_width ):
+        x_y_eq_height_b = true
+
+    x1 = -1
+    y1 = -1
+    x2 = -1
+    y2 = -1
+
+    if(x_y_eq_height_b):
+        x1 = x_y_eq_height
+        y1 = r_height
+
+    if(x_y_eq_0_b ):
+        if(x1 == -1 ):
+            x1 = x_y_eq_0
+            y1 = 0
+        else:
+            x2 = x_y_eq_0
+            y2 = 0
+
+    if(y_x_eq_wid_b):
+        if(x1 == -1 ):
+            x1 = r_width
+            y1 = y_x_eq_wid
+        else:
+            x2 = r_width
+            y2 = y_x_eq_wid
+    if(y_x_eq_0_b):
+        x2 = 0
+        y2 = y_x_eq_0
+
+    if(y1 < y2):
+        return x2 , y2, x1, y1
+
+    return x1, y1, x2 , y2
+
 
 def follow_lines(data):
     # Parse data
@@ -132,5 +188,24 @@ def follow_lines(data):
     y0, y1 = get_average_line(red_line, green_line)  # x is considered 640
     k = (y1 - y0) / 640
 
-    left(0.5)
+    x_in1, y_in1, x_in2, y_in2 = line_rect_inter(y0,k,640,480) # intersection points 
+
+    if(y_in1 == 480 ):
+        if(x_in1 > 640 *5/6):
+            if(k < 0):
+                left(0.01)
+                forward(0.1)
+            else:
+                forward(0.5)
+
+
+        if(x_in1 < 640/6):
+            if(k < 0):
+                right(0.01)
+                forward(0.1)
+            else:
+                forward(0.5)
+        else:
+            forward(1) 
+
     sleep(10)
