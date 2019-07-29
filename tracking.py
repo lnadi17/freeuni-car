@@ -33,19 +33,23 @@ def distance(event):
 
     # Save start time
     start_time_t = start_time
-    while (event.is_set() and GPIO.input(2) == 0):
-        start_time = time.time()
-        if (start_time - start_time_t > 0.1):
-            # print("entered start time loop")
-            return -1
+    try:
+        while (event.is_set() and GPIO.input(2) == 0):
+            start_time = time.time()
+            if (start_time - start_time_t > 0.1):
+                # print("entered start time loop")
+                return -1
 
-    # Save time of arrival
-    stop_time_t = start_time
-    while (event.is_set() and GPIO.input(2) == 1):
-        stop_time = time.time()
-        if (stop_time - stop_time_t > 0.1):
-            # print("entered stop time loop")
-            return -1
+        # Save time of arrival
+        stop_time_t = start_time
+        while (event.is_set() and GPIO.input(2) == 1):
+            stop_time = time.time()
+            if (stop_time - stop_time_t > 0.1):
+                # print("entered stop time loop")
+                return -1
+    except RuntimeError:
+        print("Runtime error, exiting")
+        exit()
 
     # time difference between start and arrival
     time_elapsed = stop_time - start_time
