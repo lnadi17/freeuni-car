@@ -1,6 +1,7 @@
 var locationString = "Not yet known";
 var isDangerForward = false;
 var lineGet = false;
+var percentage = "Battery: ";
 
 (function () {
     var signalObj = null;
@@ -107,6 +108,7 @@ var lineGet = false;
                     drawDanger(canvas);
                 }
                 
+                drawBattery(canvas);
             }, 33);
 
             setInterval(function () {

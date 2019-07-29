@@ -11,13 +11,20 @@ function decolorize(canvas) {
 
 function drawLocation(canvas, locationString) {
     var ctx = canvas.getContext('2d');
-    ctx.font = '23px Abel';
+    ctx.font = '30px Abel';
     ctx.textAlign ='center';
     ctx.textBaseline = 'top';
-    ctx.strokeStyle = 'black';  // a color name or by using rgb/rgba/hex values
     ctx.fillStyle = 'white';  // a color name or by using rgb/rgba/hex values
     ctx.fillText('Location: ' + locationString, canvas.width / 2, 10); // text and position
-    ctx.strokeText('Location: ' + locationString, canvas.width / 2, 10); // text and position
+}
+
+function drawBattery(canvas) {
+    var ctx = canvas.getContext('2d');
+    ctx.font = '30px Abel';
+    ctx.textAlign ='right';
+    ctx.textBaseline = 'top';
+    ctx.fillStyle = 'white';  // a color name or by using rgb/rgba/hex values
+    ctx.fillText('Battery: ' + percentage, canvas.width / 2, 10); // text and position
 }
 
 function drawBrightness(canvas) {

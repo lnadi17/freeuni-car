@@ -17,7 +17,7 @@ def battery_percentage(connection):
         ads = ADS.ADS1115(i2c)
         chan = AnalogIn(ads, ADS.P0)
         battery_voltage = chan.voltage * c
-        battery_percentage = (battery_voltage - 7.1) / 1.1
+        battery_percentage = int((battery_voltage - 7.1) / 1.1 * 100)
         battery_percentage = "%.3f" % battery_percentage
         message = message + bytes(battery_percentage, 'utf-8')
         connection.sendall(message)

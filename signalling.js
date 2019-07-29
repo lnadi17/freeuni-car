@@ -96,6 +96,10 @@ function signal(url, onStream, onError, onClose, onMessage) {
                             lineGet = true;
                         }
                     }
+
+                    if (msg[0] == 'percentage') {
+                        percentage = msg[1];
+                    }
                 }
             };
 
