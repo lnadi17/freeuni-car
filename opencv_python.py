@@ -161,6 +161,5 @@ for i in range(1, 30):
 			break
 
 		cv2.imshow('image', img)
-		# cv2.imshow('mask', g_mask)
 
 cv2.destroyAllWindows()

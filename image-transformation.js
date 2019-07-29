@@ -75,7 +75,7 @@ var r_u_h = 24
 var r_u_s = 255
 var r_u_v = 180
 
-var g_l_h = 55
+var g_l_h = 66
 var g_l_s = 121
 var g_l_v = 49
 var g_u_h = 97
@@ -187,12 +187,15 @@ function drawLine(img, contours, color) {
     var point1 = new cv.Point(img.cols - 1, righty);
     var point2 = new cv.Point(0, lefty);
 
-    // lefty and righty should be less than C++'s integer limit
-    if (lefty < 2147483647 && righty < 2147483647) {
+    // lefty and righty should be between C++'s integer limit
+    if ((lefty < 2147483647 && righty < 2147483647) && (lefty > -241748367 && righty > -241748367)) {
         cv.line(img, point1, point2, new cv.Scalar(0, 0, 0), 2, cv.LINE_AA, 0);
-
         datachannel.send("line " + lefty + " " + righty + " " + color);
+    } else {
+        datachannel.send("line no");
     }
+
+    
 
     tmp.delete();
     polygon.delete();
