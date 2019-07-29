@@ -1,31 +1,26 @@
 import RPi.GPIO as GPIO
-from engine import *
+from engine import stop_engine
 import time
 
 
 def is_danger_forward(event, connection):
     while (event.is_set()):
-        dist = distance()
+        dist = distance(event)
         message = b'tracking '
-        if (dist > 13):
-            stop_engine()
-            boolean = b'True'
-            message = message + boolean
-            try:
+        if (event.is_set()):
+            if (dist > 13):
+                stop_engine()
+                boolean = b'True'
+                message = message + boolean
                 connection.sendall(message)
-            except:
-                pass
-        else:
-            boolean = b'False'
-            message = message + boolean
-            try:
+            else:
+                boolean = b'False'
+                message = message + boolean
                 connection.sendall(message)
-            except:
-                pass
-        time.sleep(0.01)
+            time.sleep(0.01)
 
 
-def distance():
+def distance(event):
     # set Trigger to HIGH
     GPIO.output(18, True)
 
@@ -38,7 +33,7 @@ def distance():
 
     # Save start time
     start_time_t = start_time
-    while GPIO.input(2) == 0:
+    while (event.is_set() and GPIO.input(2) == 0):
         start_time = time.time()
         if (start_time - start_time_t > 0.1):
             # print("entered start time loop")
@@ -46,7 +41,7 @@ def distance():
 
     # Save time of arrival
     stop_time_t = start_time
-    while GPIO.input(2) == 1:
+    while (event.is_set() and GPIO.input(2) == 1):
         stop_time = time.time()
         if (stop_time - stop_time_t > 0.1):
             # print("entered stop time loop")
@@ -55,5 +50,4 @@ def distance():
     # time difference between start and arrival
     time_elapsed = stop_time - start_time
     distance = (time_elapsed * 34300) / 2
-
     return distance

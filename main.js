@@ -150,7 +150,7 @@ var isDangerForward = false;
 
         safetyEffect.addEventListener('click', function () {
             isSafetyEffectActive = !isSafetyEffectActive;
-            console.log("Toggled safety.");
+            console.log("safety " + isSafetyEffectActive);
         }, false);
     });
 })();

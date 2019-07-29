@@ -7,6 +7,6 @@ def update_headlights(data):
 
     if ("headlights" == first_word):
         if ("true" in data):
-            GPIO.output(4, GPIO.HIGH)
+            GPIO.output(27, GPIO.HIGH)
         elif ("false" in data):
-            GPIO.output(4, GPIO.LOW)
+            GPIO.output(27, GPIO.LOW)
