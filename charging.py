@@ -201,15 +201,15 @@ def charge_loop(connection):
         y0, y1 = get_average_line(red_line, green_line)  # x is considered 640
         k = (y1 - y0) / 640
 
-        x_in1, y_in1, x_in2, y_in2 = line_rect_inter(y0,k,640,480) # intersection points 
+        x_in1, y_in1, x_in2, y_in2 = line_rect_inter(y0,k,640,480) # intersection points
 
         print(x_in1, " ", y_in1, " ", x_in2, " ", y_in2)
 
         if (y_in1 == 480):
-            if (x_in1 > 640 * 3 / 4):  # box right
                 if(x_in2 > 640 * 3 / 4):  # incline forwards
                     left(0.3)
                     forward(0.1)
+                    if (x_in1 > 640 * 3 / 4):  # box right
 
                 elif (x_in2 < 640 * 3 / 4 and x_in2 > 640 * 1 / 4):  # go towards
                     left(0.1)
@@ -240,5 +240,29 @@ def charge_loop(connection):
                 else : # incline towards
                     left(0.3)
                     forward(0.1)
+
+        elif(x_in1 == 0):
+
+            if(x_in2 < 640 * 1 / 4):  # on right side
+                left(0.3)
+                forward(0.05)
+            elif(x_in2 < 640 * 3 / 4 and x_in2 > 640*1 /4):  # make a move bare it
+                forward(0.05)
+            else(x_in2 > 640 * 3 / 4):  # if forward then cross, so go left
+                right(0.2)
+                forward(0.05)
+
+        elif(x_in2 == 640):
+
+            if(x_in2 > 640 * 3 / 4):  # on right side
+                right(0.3)
+                forward(0.05)
+            elif(x_in2 < 640 * 3 / 4 and x_in2 > 640* 1 /4):  # make a move bare it
+                forward(0.05)
+            else(x_in2 < 640 * 1 / 4):  # if forward then cross, so go left
+                left(0.2)
+                forward(0.05)
+
+
 
     # sleep(10)
