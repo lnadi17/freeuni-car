@@ -207,9 +207,9 @@ def charge_loop(connection):
 
         if (y_in1 == 480):
                 if(x_in2 > 640 * 3 / 4):  # incline forwards
+                    if (x_in1 > 640 * 3 / 4):  # box right
                     left(0.3)
                     forward(0.1)
-                    if (x_in1 > 640 * 3 / 4):  # box right
 
                 elif (x_in2 < 640 * 3 / 4 and x_in2 > 640 * 1 / 4):  # go towards
                     left(0.1)
@@ -242,7 +242,6 @@ def charge_loop(connection):
                     forward(0.1)
 
         elif(x_in1 == 0):
-
             if(x_in2 < 640 * 1 / 4):  # on right side
                 left(0.3)
                 forward(0.05)
@@ -262,7 +261,5 @@ def charge_loop(connection):
             else(x_in2 < 640 * 1 / 4):  # if forward then cross, so go left
                 left(0.2)
                 forward(0.05)
-
-
 
     # sleep(10)
