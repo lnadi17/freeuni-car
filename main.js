@@ -153,6 +153,7 @@ var percentage = "Battery: ";
 
         safetyEffect.addEventListener('click', function () {
             isSafetyEffectActive = !isSafetyEffectActive;
+            datachannel.send("safety " + isSafetyEffectActive);
             console.log("safety " + isSafetyEffectActive);
         }, false);
     });

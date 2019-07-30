@@ -26,8 +26,8 @@ def stop():
 
 
 def start():
-    l.ChangeDutyCycle(50)
-    r.ChangeDutyCycle(50)
+    l.ChangeDutyCycle(70)
+    r.ChangeDutyCycle(70)
 
 
 def forward(time):
@@ -206,60 +206,61 @@ def charge_loop(connection):
         print(x_in1, " ", y_in1, " ", x_in2, " ", y_in2)
 
         if (y_in1 == 480):
+            print("rame")
             if(x_in2 > 640 * 3 / 4):  # incline forwards
                 if (x_in1 > 640 * 3 / 4):  # box right
                     left(0.3)
-                    forward(0.1)
+                    forward(0.25)
 
                 elif (x_in2 < 640 * 3 / 4 and x_in2 > 640 * 1 / 4):  # go towards
                     left(0.1)
-                    forward(0.1)
+                    forward(0.25)
                 else:  # incline towards
                     right(0.3)
-                    forward(0.1)
+                    forward(0.25)
             elif (x_in1 < 640 * 3 / 4 and x_in1 > 640 * 1 / 4):  # middle of the box
 
                 if (x_in2 > 640 * 3 / 4):  # incline forwards
                     right(0.3)
-                    forward(0.1)
+                    forward(0.25)
                 elif (x_in2  < 640 * 3 / 4 and x_in2  > 640 * 1 / 4):  # go towards
-                    forward(0.1)
+                    forward(0.25)
                 else:  # incline towards
                     left(0.3)
-                    forward(0.1)
+                    forward(0.25)
 
             else:  # left of box
-
+                print("ramiem")
                 if (x_in2 > 640 * 3 / 4):  # incline forwards
                     right(0.3)
-                    forward(0.1)
+                    forward(0.25)
 
                 elif(x_in2  < 640 * 3/4 and x_in2  > 640 * 1/4): # go towards
                     right(0.1)
-                    forward(0.1)
+                    forward(0.25)
                 else : # incline towards
                     left(0.3)
-                    forward(0.1)
+                    forward(0.25)
 
         elif(x_in1 == 0):
             if(x_in2 < 640 * 1 / 4):  # on right side
-                left(0.3)
-                forward(0.05)
+                left(0.15)
+                forward(0.15)
             elif(x_in2 < 640 * 3 / 4 and x_in2 > 640*1 /4):  # make a move bare it
-                forward(0.05)
-            else(x_in2 > 640 * 3 / 4):  # if forward then cross, so go left
-                right(0.2)
-                forward(0.05)
+                forward(0.15)
+            elif(x_in2 > 640 * 3 / 4):  # if forward then cross, so go left
+                right(0.1)
+                forward(0.15)
 
         elif(x_in2 == 640):
-
+            print("ruem")
             if(x_in2 > 640 * 3 / 4):  # on right side
-                right(0.3)
-                forward(0.05)
+                right(0.15)
+                forward(0.15)
             elif(x_in2 < 640 * 3 / 4 and x_in2 > 640* 1 /4):  # make a move bare it
-                forward(0.05)
-            else(x_in2 < 640 * 1 / 4):  # if forward then cross, so go left
-                left(0.2)
-                forward(0.05)
+                forward(0.15)
+            elif(x_in2 < 640 * 1 / 4):  # if forward then cross, so go left
+                left(0.1)
+                forward(0.15)
 
     # sleep(10)

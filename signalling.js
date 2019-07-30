@@ -82,7 +82,9 @@ function signal(url, onStream, onError, onClose, onMessage) {
                     // Change location string
                     if (msg[0] == 'location') {
                         locationString = msg[2];
-                    } else if (msg[0] == 'tracking') {
+                    } 
+
+                    if (msg[0] == 'tracking') {
                         if (msg[1] == 'True') {
                             isDangerForward = true;
                         } else {
@@ -92,13 +94,14 @@ function signal(url, onStream, onError, onClose, onMessage) {
 
                     if (msg[0] == 'line') {
                         if (msg[1] == 'get') {
-                            console.log("line get")
+                            console.log("line get");
                             lineGet = true;
                         }
                     }
 
                     if (msg[0] == 'percentage') {
                         percentage = msg[1];
+                        console.log("got percentage");
                     }
                 }
             };

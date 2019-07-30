@@ -24,7 +24,7 @@ function drawBattery(canvas) {
     ctx.textAlign ='right';
     ctx.textBaseline = 'top';
     ctx.fillStyle = 'white';  // a color name or by using rgb/rgba/hex values
-    ctx.fillText('Battery: ' + percentage, canvas.width / 2, 10); // text and position
+    ctx.fillText('Battery: ' + percentage, 630, 10); // text and position
 }
 
 function drawBrightness(canvas) {
@@ -70,9 +70,7 @@ function drawDanger(canvas) {
     ctx.textAlign ='left';
     ctx.textBaseline = 'top';
     ctx.fillStyle = 'red';  // a color name or by using rgb/rgba/hex values
-    ctx.fillText('Danger Ahead!', 10, 10); // text and position
-    // ctx.strokeStyle = 'black';  // a color name or by using rgb/rgba/hex values
-    // ctx.strokeText('Danger Ahead!', 10, 10); // text and position
+    ctx.fillText('DANGER AHEAD', 10, 10); // text and position
 }
 
 var r_l_h = 0

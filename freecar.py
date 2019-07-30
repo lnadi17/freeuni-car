@@ -13,7 +13,7 @@ SOCKET_PATH = '/tmp/uv4l.socket'
 
 find_event = Event()
 danger_event = Event()
-charging_event = Event()
+percentage_event = Event()
 
 try:
     os.unlink(SOCKET_PATH)
@@ -37,7 +37,7 @@ while True:
 
         find_event.set()
         danger_event.set()
-        # charging_event.set()
+        percentage_event.set()
 
         location_thread = Thread(
             target=update_location, args=(find_event, connection,))
@@ -47,11 +47,11 @@ while True:
             target=is_danger_forward, args=(danger_event, connection,))
         danger_thread_foward.start()
 
-        battery_thread = Thread(target=battery_percentage, args=(connection,))
+        battery_thread = Thread(target=battery_percentage, args=(percentage_event, connection,))
         battery_thread.start()
 
         # charging_thread = Thread(
-        #     target=follow_lines(charge_event, connection,))
+        #     target=charge_loop(charge_event, connection,))
         # charging_thread.start()
 
         while True:
@@ -63,11 +63,12 @@ while True:
 
             print("Received message: %s" % data)
 
-            if (is_charging(data)):
-                charge_loop(connection)
-                print("loop finished")
-                time.sleep(0.01)
-                continue
+            # if (is_charging(data)):
+            #     charge_loop(connection)
+            #     print("loop finished")
+            #     time.sleep(0.01)
+            #     continue
+            update_safety(data)
             update_headlights(data)
             run_engine_with_keyboard_input(data)
 
@@ -75,5 +76,6 @@ while True:
     finally:
         find_event.clear()
         danger_event.clear()
+        percentage_event.clear()
         GPIO.cleanup()
         connection.close()
