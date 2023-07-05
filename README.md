@@ -7,7 +7,7 @@ Currently, this repository is archived and the hardware of the car itself is dis
 
 <figure>
   <img src="./readme_images/early_demo.gif" alt="Early Prototype">
-  <figcaption>Picture: Early prototype showcase of the project</figcaption>
+  <figcaption>Caption: Early prototype showcase of the project</figcaption>
 </figure>
 
 ## Features
@@ -34,7 +34,7 @@ such as tables and stairs.
 
 <figure>
 <img src="./readme_images/headlights.jpg" alt="Picture of Freecar in the dark" height="150px">
-<figcaption>Picture: Freecar in the dark with headlights on</figcaption>
+<figcaption>Caption: Freecar in the dark with headlights on</figcaption>
 </figure>
 
 ### Web Files
@@ -43,7 +43,7 @@ such as tables and stairs.
 - **singalling.js** - Sets up a signaling object for establishing a WebRTC connection with a car.
 
 ## Hardware Parts
-Unfortunately, we don't have the exact list for the hardware parts used. All the retrieved images and videos are from the early prototype stage. However, we compiled a possibly incomplete list of used hardware parts:
+Unfortunately, we don't have the exact list for the hardware parts used. From the retrieved images, videos and memory, we compiled a list of used hardware parts:
 - 2WD Robot Car Chassis
 - Raspberry Pi 3
 - 2.0MP Camera module compatible with Raspberry Pi
@@ -60,13 +60,13 @@ Unfortunately, we don't have the exact list for the hardware parts used. All the
 
 <figure>
   <img src="./readme_images/close_up.jpg" alt="Close Up of Hardware Setup" width="300px">
-  <figcaption>Picture: Early close up picture of the car</figcaption>
+  <figcaption>Caption: Early close up picture of the car</figcaption>
 </figure>
 
 ## Future Development
-Unfortunately, Freecar was disassembled a couple of months after finishing the Sophomore Project. We could not find videos that could showcase the finished version of this car. No future development of this project is planned, and repository is archived. Feel free to explore this repository, fork it if you want, or use parts of the code.
+Unfortunately, Freecar was disassembled a couple of months after finishing the Sophomore Project, and no future development of this project is planned. The repository is archived and serves as a reference for educational purposes. Feel free to explore the repository, fork it if you wish, or use parts of the code for your own projects.
 
 <figure>
   <img src="./readme_images/dc_demo.gif" alt="Early Prototype">
-  <figcaption>Picture: Video captured when Freecar was still attached to the DC source</figcaption>
+  <figcaption>Caption: Video captured when Freecar was still attached to the DC source</figcaption>
 </figure>
