@@ -59,7 +59,7 @@ Unfortunately, we don't have the exact list for the hardware parts used. From th
 - Button for hard reset
 
 <figure>
-  <img src="./readme_images/close_up.jpg" alt="Close Up of Hardware Setup" width="300px">
+  <img src="./readme_images/without_battery.jpg" alt="Close Up of Freecar" width="500px">
   <figcaption>Caption: Early close up picture of the car</figcaption>
 </figure>
 
